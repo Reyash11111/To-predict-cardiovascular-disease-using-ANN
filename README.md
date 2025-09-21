@@ -28,11 +28,9 @@ model = Sequential([
 model.compile(optimizer=Adam(learning_rate=0.001),
               loss='binary_crossentropy',
               metrics=['accuracy'])
+# Train model
+model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.2)
 single_patient = X_test[0].reshape(1, -1)
 probability = model.predict(single_patient)[0][0]
 prediction = "Yes" if probability >= 0.5 else "No"
 print(f"Predicted probability: {probability:.2f}, Prediction: {prediction}")
-
-
-# Train model
-model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.2)
